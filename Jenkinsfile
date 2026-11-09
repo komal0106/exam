@@ -12,7 +12,7 @@ pipeline {
         stage('Docker Login') {
             steps {
                 echo "Logging in to Docker Hub..."
-
+            
                 bat "docker login -u komal0106 -p guddu2006"
             }
         }
@@ -20,7 +20,7 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 echo "Pushing Docker Image to Docker Hub..."
-
+                bat "docker tag mypythonimage komal0106/week9repo:latest"
                 bat "docker push komal0106/week9repo:latest"
             }
         }

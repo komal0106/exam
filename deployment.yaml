@@ -9,11 +9,10 @@ spec:
       app: week9-app
   template:
     metadata:
-      labels:
+      
         app: week9-app
     spec:
       containers:
         - name: week9-app
           image: komal0106/week9repo:latest
-          ports:
-            - containerPort: 5000
+            - Port: 5000

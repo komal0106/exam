@@ -2,14 +2,14 @@ pipeline {
     agent any
     stages {
 
-        stage('Build Docker Image') {
+        stage('Build') {
             steps {
                
                 bat "docker build -t mypythonimage:latest ."
             }
         }
 
-        stage('Docker Login') {
+        stage('Login') {
             steps {
                 echo "Logging in to Docker Hub..."
             
@@ -17,7 +17,7 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image to Docker Hub') {
+        stage('Push') {
             steps {
                 echo "Pushing Docker Image to Docker Hub..."
                 bat "docker tag mypythonimage komal0106/week9repo:latest"
@@ -25,26 +25,24 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
+        stage('Deploy') {
             steps {
-               
-
+            
                 bat "kubectl apply -f deployment.yaml --validate=false"
                 bat "kubectl apply -f service.yaml"
             }
         }
 
-        
     }
 
     post {
         success {
-            echo "PIPELINE COMPLETED SUCCESSFULLY!"
+            echo "deployed successfully"
             
         }
 
         failure {
-            echo "PIPELINE FAILED!"
+            echo "deployment failed"
           
         }
     }
